@@ -38,5 +38,65 @@ Follow these steps to set up the project locally using **Docker**.
    ```
 2. **Run Docker Compose**
    ```bash
-   docker-compose up
+   docker-compose up --build
    ```
+   This will:
+
+   - Build images for all microservices
+   - Start containers for Eureka, API Gateway, RabbitMQ, PostgreSQL, and frontend (if included)
+   - Create a dedicated Docker network (ewallet-net)
+  
+3. **Access the components**
+
+   - Eureka Dashboard → http://localhost:8761
+   - API Gateway → http://localhost:8080
+   - Frontend UI → http://localhost:5173
+   - Microservices (if ports are exposed):
+        - Auth → http://localhost:8090
+        - Wallet → http://localhost:8092
+        - Transaction → http://localhost:8094
+        - Payment → http://localhost:8096
+        - Refund → http://localhost:8097
+   - RabbitMQ Management → http://localhost:15672
+  
+4. **Stop and clean up**
+   ```bash
+   docker-compose down
+   ```
+
+## 🤝 Contributing
+
+### We welcome contributions from the community!
+
+🔧 **Steps to Contribute**
+   - Fork the repository
+   - Create a feature branch (git checkout -b feature/my-awesome-feature)
+   - Make your changes (code, docs, or bug fixes)
+   - Test locally via Docker Compose
+   - Commit with a descriptive message (git commit -m "feat: add email verification in auth-service")
+   - Push to your fork (git push origin feature/my-awesome-feature)
+   - Open a Pull Request (PR)
+   - Clearly describe your changes
+   - Link any related issues
+   - Ensure CI/Docker builds pass
+
+## 📂 Project Structure
+   ```bash
+   EWallet_Java/
+   ├── Backend/
+   │   ├── apigateway/
+   │   ├── authservice/
+   │   ├── walletservice/
+   │   ├── transactionservice/
+   │   ├── payment-service/
+   │   ├── refund-service/
+   │   └── server-registry-eureka/
+   ├── Frontend/   (if applicable)
+   ├── docker-compose.yml
+   └── README.md
+   ```
+
+### Each microservice includes:
+   - src/ (Java source code)
+   - Dockerfile (multi-stage Maven build recommended)
+   - application.yml (Eureka + service config)
