@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: refund-service
+  profiles:
+    active: default
+  rabbitmq:
+    host: rabbit-mq
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 5
+          initial-interval: 1000
+          multiplier: 2.0
+          max-interval: 10000
+        concurrency: 3
+        max-concurrency: 10
+        missing-queues-fatal: false
+
+server:
+  port: 8097
+
+rabbitmq:
+  exchange:
+    startPayment:
+      name: "paymentExchange"
+  queue:
+    refund:
+      name: "refundAmount"
+  routing:
+    refund:
+      key: "refundRoutingKey"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaservice:8761/eureka/

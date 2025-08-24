@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: transactionservice
+  profiles:
+    active: default
+  rabbitmq:
+    host: rabbit-mq
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 8094
+
+rabbitmq:
+  queue:
+    startPayment:
+      name: "startPayment"
+  exchange:
+    startPayment:
+      name: "paymentExchange"
+  routing:
+    startPayment:
+      key: "startPaymentRoutingKey"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaservice:8761/eureka/

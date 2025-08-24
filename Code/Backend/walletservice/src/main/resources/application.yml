@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: walletservice
+  profiles:
+    active: default
+server:
+  port: 8092
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaservice:8761/eureka/

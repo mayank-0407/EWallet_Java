@@ -1,0 +1,46 @@
+----------------------------------User Schema------------------------------------------------------
+--DROP TABLE IF EXISTS user_model;
+--
+--CREATE TABLE user_model (
+--    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+--    name VARCHAR(255) NOT NULL,
+--    email VARCHAR(255) NOT NULL,
+--    username VARCHAR(255) NOT NULL UNIQUE,
+--    is_merchant BOOLEAN,
+--    dob DATE,
+--    phone_number VARCHAR(255) NOT NULL UNIQUE,
+--    wallet_id VARCHAR(255) UNIQUE,
+--    password VARCHAR(255) NOT NULL
+--);
+--
+--ALTER TABLE user_model ALTER COLUMN id RESTART WITH 10000;
+----------------------------------User Schema Ends--------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------Wallet Schema-----------------------------------------------------------
+--DROP TABLE IF EXISTS wallet_model;
+--
+--CREATE TABLE wallet_model (
+--    wallet_id VARCHAR(255) PRIMARY KEY,
+--    user_id VARCHAR(255) NOT NULL UNIQUE,
+--    balance DOUBLE NOT NULL,
+--    wallet_limit DOUBLE
+--);
+----------------------------------Wallet Schema Ends------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------Transaction Schema------------------------------------------------------
+---- Drop the table if it exists
+--DROP TABLE IF EXISTS transaction_model;
+--
+--CREATE TABLE transaction_model (
+--    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+--    transaction_init_time TIMESTAMP NOT NULL,
+--    transaction_completed_time TIMESTAMP,
+--    status VARCHAR(255),
+--    sender_wallet_id VARCHAR(255),
+--    receiver_wallet_id VARCHAR(255),
+--    amount DOUBLE NOT NULL,
+--    remarks VARCHAR(255)
+--);
+--
+--ALTER TABLE transaction_model ALTER COLUMN id RESTART WITH 10000;
+----------------------------------Transaction Schema Ends------------------------------------------------------

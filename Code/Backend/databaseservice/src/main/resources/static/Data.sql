@@ -1,0 +1,17 @@
+---- Insert Users
+--INSERT INTO user_model (name, email, username, is_merchant, dob, phone_number, wallet_id, password)
+--VALUES
+--  ('Mayank Aggarwal', 'mayank@gmail.com', '12345', FALSE, '2003-04-07', '12345', 'temp@wallet', 'pass123'),
+--  ('Bob Johnson', 'bob@gmail.com', '9876543210', TRUE, '1985-06-15', '9876543210', 'temp1@wallet', 'secure456');
+--
+---- Insert Wallets
+--INSERT INTO wallet_model (wallet_id, user_id, balance, wallet_limit)
+--VALUES
+--  ('10000', '10000', 5000.0, 10000.0),
+--  ('10001', '10001', 7500.0, 15000.0);
+--
+---- Insert Transactions
+--INSERT INTO transaction_model (transaction_init_time, transaction_completed_time, status, sender_wallet_id, receiver_wallet_id, amount, remarks)
+--VALUES
+--  (CURRENT_TIMESTAMP, NULL, 'PENDING', 'temp@wallet', 'temp1@wallet', 1500.0, 'Rent payment'),
+--  (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'COMPLETED', 'temp1@wallet', 'temp@wallet', 500.0, 'Refund');

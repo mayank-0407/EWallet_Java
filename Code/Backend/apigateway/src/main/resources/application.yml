@@ -1,0 +1,51 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: authservice
+          uri: lb://AUTHSERVICE
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - AuthenticationFilter
+
+        - id: walletservice
+          uri: lb://WALLETSERVICE
+          predicates:
+            - Path=/api/wallet/**
+          filters:
+            - AuthenticationFilter
+
+        - id: transactionservice
+          uri: lb://TRANSACTIONSERVICE
+          predicates:
+            - Path=/api/transaction/**
+          filters:
+            - AuthenticationFilter
+
+        - id: payment-service
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/payment/**
+          filters:
+            - AuthenticationFilter
+
+  application:
+    name: ApiGateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://eurekaservice:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always

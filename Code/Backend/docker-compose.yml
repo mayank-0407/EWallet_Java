@@ -1,0 +1,128 @@
+version: "3.9"
+
+services:
+  # Eureka Service
+  eurekaservice:
+    build: ./server-registry-eureka
+    container_name: eurekaservice
+    ports:
+      - "8761:8761"
+    networks:
+      - ewallet-net
+
+  # API Gateway
+  api-gateway:
+    build: ./apigateway
+    container_name: api-gateway
+    depends_on:
+      - eurekaservice
+    ports:
+      - "8080:8080"
+    networks:
+      - ewallet-net
+
+  # database Service
+  database-service:
+    build: ./databaseservice
+    container_name: database-service
+    depends_on:
+      - eurekaservice
+      - api-gateway
+    ports:
+      - "8989:8989"
+    networks:
+      - ewallet-net
+
+  # auth Service
+  auth-service:
+    build: ./authservice
+    container_name: auth-service
+    depends_on:
+      - eurekaservice
+      - database-service
+      - api-gateway
+    ports:
+      - "8090:8090"
+    networks:
+      - ewallet-net
+
+  # Wallet Service
+  wallet-service:
+    build: ./walletservice
+    container_name: wallet-service
+    depends_on:
+      - eurekaservice
+      - database-service
+      - api-gateway
+    ports:
+      - "8092:8092"
+    networks:
+      - ewallet-net
+
+  # Transaction Service
+  transaction-service:
+    build: ./transactionservice
+    container_name: transaction-service
+    depends_on:
+      - eurekaservice
+      - database-service
+      - rabbitmq
+      - api-gateway
+    ports:
+      - "8094:8094"
+    networks:
+      - ewallet-net
+
+  # Payment Service
+  payment-service:
+    build: ./payment-service
+    container_name: payment-service
+    depends_on:
+      - eurekaservice
+      - database-service
+      - rabbitmq
+      - api-gateway
+    ports:
+      - "8096:8096"
+    networks:
+      - ewallet-net
+
+  # Refund Service
+  refund-service:
+    build: ./refund-service
+    container_name: refund-service
+    depends_on:
+      - eurekaservice
+      - database-service
+      - rabbitmq
+      - api-gateway
+    ports:
+      - "8097:8097"
+    networks:
+      - ewallet-net
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbit-mq
+    ports:
+      - "5672:5672"   # RabbitMQ broker
+      - "15672:15672" # Management UI
+    networks:
+      - ewallet-net
+
+  frontend:
+    build: ./Frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - eurekaservice
+      - database-service
+      - api-gateway
+    networks:
+    - ewallet-net
+
+networks:
+  ewallet-net:
+    driver: bridge

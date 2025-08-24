@@ -1,0 +1,26 @@
+# Stage 1: Build with Maven
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy everything (pom.xml + src + configs)
+COPY . .
+
+# Build application
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run the app
+FROM eclipse-temurin:17-jdk-jammy
+
+# Set working directory
+WORKDIR /app
+
+# Copy the built JAR from builder stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expose application port
+EXPOSE 8096
+
+# Run the JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]

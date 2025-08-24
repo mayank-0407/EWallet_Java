@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: authservice
+  profiles:
+    active: default
+
+server:
+  port: 8090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaservice:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
