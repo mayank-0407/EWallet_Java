@@ -80,7 +80,7 @@ const AddMoneyToWallet = () => {
           <div className="flex flex-col items-center mb-4">
             <div className="w-20 h-20 rounded-full  mb-2">
               <img
-                src="src\assets\E-Wallet Logo PNG.png" // Replace with actual URL
+                src="/E_Wallet_Logo_PNG.png" // Replace with actual URL
                 alt="Wallet"
                 className="w-full h-full object-contain"
               />

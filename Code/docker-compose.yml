@@ -3,7 +3,7 @@ version: "3.9"
 services:
   # Eureka Service
   eurekaservice:
-    build: ./server-registry-eureka
+    build: ./Backend/server-registry-eureka
     container_name: eurekaservice
     ports:
       - "8761:8761"
@@ -12,7 +12,7 @@ services:
 
   # API Gateway
   api-gateway:
-    build: ./apigateway
+    build: ./Backend/apigateway
     container_name: api-gateway
     depends_on:
       - eurekaservice
@@ -23,7 +23,7 @@ services:
 
   # database Service
   database-service:
-    build: ./databaseservice
+    build: ./Backend/databaseservice
     container_name: database-service
     depends_on:
       - eurekaservice
@@ -35,7 +35,7 @@ services:
 
   # auth Service
   auth-service:
-    build: ./authservice
+    build: ./Backend/authservice
     container_name: auth-service
     depends_on:
       - eurekaservice
@@ -48,7 +48,7 @@ services:
 
   # Wallet Service
   wallet-service:
-    build: ./walletservice
+    build: ./Backend/walletservice
     container_name: wallet-service
     depends_on:
       - eurekaservice
@@ -61,7 +61,7 @@ services:
 
   # Transaction Service
   transaction-service:
-    build: ./transactionservice
+    build: ./Backend/transactionservice
     container_name: transaction-service
     depends_on:
       - eurekaservice
@@ -75,7 +75,7 @@ services:
 
   # Payment Service
   payment-service:
-    build: ./payment-service
+    build: ./Backend/payment-service
     container_name: payment-service
     depends_on:
       - eurekaservice
@@ -89,7 +89,7 @@ services:
 
   # Refund Service
   refund-service:
-    build: ./refund-service
+    build: ./Backend/refund-service
     container_name: refund-service
     depends_on:
       - eurekaservice
@@ -110,6 +110,18 @@ services:
       - "15672:15672" # Management UI
     networks:
       - ewallet-net
+
+  frontend:
+    build: ./Frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - eurekaservice
+      - database-service
+      - api-gateway
+    networks:
+    - ewallet-net
 
 networks:
   ewallet-net:

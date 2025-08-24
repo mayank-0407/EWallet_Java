@@ -3,4 +3,4 @@ export const ACCOUNT_TYPE = {
     MERCHANT:"Merchant",    
   };
 
-export const BASE_URL = "http://api-gateway:8080/";
+export const BASE_URL = "http://localhost:8080/";

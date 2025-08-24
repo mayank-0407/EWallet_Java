@@ -114,19 +114,19 @@ function ProcessingTransaction() {
             <div className="flex justify-center items-center">
               {initialTransactions.status === "Processing" ? (
                 <img
-                  src="src\assets\Transaction_Processing_status.png"
+                  src="/Transaction_Processing_status.png"
                   alt="Processing"
                   className="w-32 h-32 jump-animation-processing"
                 />
               ) : initialTransactions.status === "Success" ? (
                 <img
-                  src="src\assets\Transaction_Success_status.png"
+                  src="/Transaction_Success_status.png"
                   alt="Success"
                   className="w-32 h-32 jump-animation-success"
                 />
               ) : (
                 <img
-                  src="src\assets\Transaction_Fail_status.png"
+                  src="/Transaction_Fail_status.png"
                   alt="Fail"
                   className="w-32 h-32 jump-animation-failed"
                 />

@@ -119,7 +119,7 @@ function LoginForm() {
         <div className="flex lg:flex-row sm:flex-col md:flex-row flex-col w-full h-full md:justify-center items-center">
           <div className="flex flex-col md:w-[30%] w-[100%] md:h-full h-[30%] bg-gray-200 p-4  justify-center items-center">
             <img
-              src="src\assets\E-Wallet Logo PNG.png"
+              src="/E_Wallet_Logo_PNG.png"
               alt=""
               className="w-16 h-16 mr-2 sm:mr-4 "
             />
